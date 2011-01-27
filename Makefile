@@ -9,7 +9,8 @@ VERSION = $(shell git describe --abbrev=0 --match=[0-9]\.[0-9]\.[0-9])
 ifeq ($(strip $(VERSION)),)
 	VERSION = 0.0.0
 endif
-BUILD_STAMP = $(shell date +"%Y%m%d_%H%M")
+BUILD_STAMP = $(shell date +"%Y%m")
+#BUILD_STAMP = $(shell date +"%Y%m%d_%H%M")
 # Get URL from remote GIT repo
 URL = $(shell git config --get remote.origin.url)
 ifeq ($(strip $(GIT_URL)),)
@@ -67,7 +68,7 @@ rpm:	tar
 			--define "prefix $(PREFIX)" \
 			--define "source_dir $(PROJROOT)/$(RPM_DIR)/SOURCES" \
 			$(NAME).spec
-	@echo Copying generated RPM to dist dir,,,
+	@echo Copying generated RPM to dist dir...
 	@cp $(PROJROOT)/$(RPM_DIR)/RPMS/noarch/*.rpm $(PROJROOT)/$(DIST_DIR)/
 
 clean:
