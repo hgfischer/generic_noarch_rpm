@@ -5,15 +5,15 @@ LICENSE = CC
 VENDOR = hgfischer
 PREFIX = /opt
 
+# Get Version from GIT tags with pattern (N.N.N)
 VERSION = $(shell git describe --abbrev=0 --match=[0-9]\.[0-9]\.[0-9])
 ifeq ($(strip $(VERSION)),)
 	VERSION = 0.0.0
 endif
 BUILD_STAMP = $(shell date +"%Y%m")
-#BUILD_STAMP = $(shell date +"%Y%m%d_%H%M")
 # Get URL from remote GIT repo
 URL = $(shell git config --get remote.origin.url)
-ifeq ($(strip $(GIT_URL)),)
+ifeq ($(strip $(URL)),)
 	URL = http://url.for.your.project.com/
 endif
 
@@ -60,7 +60,7 @@ rpm:	tar
 			--define "summary $(SUMMARY)" \
 			--define "version $(VERSION)" \
 			--define "release $(RELEASE)" \
-			--define "url _$(GIT_URL)_" \
+			--define "url _$(URL)_" \
 			--define "license $(LICENSE)" \
 			--define "group $(GROUP)" \
 			--define "vendor $(VENDOR)" \
