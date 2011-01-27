@@ -1,0 +1,25 @@
+ABOUT
+
+This is a sample project that includes a Makefile and a SPECfile to generate noarch RPM packages. With a bit of Makefile and rpmbuild knowledge you can extend this files to
+do any kind of package, including build steps, etc. This sample also supports git URLs and git tags for versioning.
+
+INSTRUCTIONS
+
+TWEAK Makefile
+
+You must tweak the above variables in Makefile:
+
+   NAME: this defines the project name, package name and specfile name;
+   SUMMARY, GROUP, LICENSE, VENDOR: self explanatory;
+   PREFIX: the directory prefix where the package will be installed (ex.: /usr, /opt, /usr/local). This usually can be specified during package installation;
+
+If you are NOT using GIT for versioning, tweak VERSION and URL. You can do it inside the ifeq structures.
+
+Tweak TAR_DIRS, preptar and tar to setup which files will be packaged and how. The idea here is to generate a tarfile containing the file structure that is supposed to be
+created inside the PREFIX directory when the package is installed.
+
+TWEAK SPECfile
+
+Tweak %file section acording to your project. This section describes files included in the package and it's permissions and ownership.
+
+Tweak %changelog at will
